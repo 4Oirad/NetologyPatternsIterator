@@ -1,22 +1,31 @@
 import java.util.Iterator;
+import java.util.PrimitiveIterator;
 import java.util.Random;
 
 public class Randoms implements Iterable<Integer> {
-    protected Random random;
+
+    private PrimitiveIterator.OfInt randomIterator;
+    private int min;
+    private int max;
 
     public Randoms(int min, int max) {
-        min = random.nextInt(min);
-        max = random.nextInt(max);
-
-
+        randomIterator = new Random().ints(min, (max + 1)).iterator();
+        this.min = min;
+        this.max = max;
     }
 
     @Override
     public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+            @Override
+            public boolean hasNext() {
+                return true;
+            }
 
-
-        return null;
+            @Override
+            public Integer next() {
+                return randomIterator.nextInt();
+            }
+        };
     }
-
-    //...
 }
